@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+{% include 'title.html' %}
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <title>About Active City</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<style>
+    .col2 h1,p{margin-left: 15px;}
+    p{font-size: 18px;}
+    .col1{text-align: right;}
+    h1{color: green;}
+    {% block style %}
+
+    {% endblock %}
+
+</style>
+{% block head %}
+{% endblock %}
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <center><img src="{% static 'images/active_city.png' %}"></center>
+        <div class="col-md-6 col1">
+            <img src="{% static 'images/Active_logo2.jpg' %}">
+        </div>
+        <div class="col-md-6 col2">
+            <h1>Mission</h1>
+            <p>Active City hopes to work with community stakeholders to transform Hartford
+            into America’s most physically active city for children. It will ensure that all
+            Hartford youth are involved in organized and affordable athletic programs.
+            These programs will grow and develop their spirit, mind, and body, while also
+                fostering relationships between the city’s youth and positive members of our community.</p>
+
+            <h1>Vision</h1>
+            <p>Active City is a non-profit organization formed to bring together different sports and recreation
+            organizations to better organize and support youth recreation throughout the city. Long standing
+            youth programs such as Saturday Hoopsters, Hartford Soccer Club, and Mayor Mike’s Little League now
+            fall under Active City’s structure. The creation of Active City is intended to better serve Hartford’s youth.
+            By combining ongoing efforts to keep children active we hope to not only improve the quality of the existing programs,
+            but also increase the availability of the programs by increasing awareness and keeping costs low to families.</p>
+
+
+        </div>
+        <button type="submit"></button>
+    </div>
+        {% include 'footer.html' %}
+    </div>
+</body>
+</html>

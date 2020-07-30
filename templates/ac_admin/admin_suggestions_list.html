@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+{% extends 'ac_admin/admin_index.html' %}
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    {% block style %}
+        .sugg-table{margin-left:5%;}
+        .sugg-table th{font-size:20px;border-bottom:2px solid orange}
+        .sugg-table td{border-bottom:1px solid red;font-size:20px;}
+        h1{color:green;}
+    {% endblock %}
+
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2 col1">
+        </div>
+        <div class="col-md-10">
+            {% block body %}
+
+                <table class="sugg-table">
+                    <tr><th colspan="5"><h1>Suggestion's...!</h1></th></tr>
+                    <tr>
+                        <th width="100">Sugg_Id</th>
+                        <th width="300">Message</th>
+                        <th width="200">Department</th>
+                        <th width="">Date</th>
+                        <th width="">Delete</th>
+                    </tr>
+                    {% for obj in list %}
+                        <tr>
+                            <td>{{ obj.sugs_id }}</td>
+                            <td>{{ obj.message }}</td>
+                            <td>{{ obj.dept_name_id }}</td>
+                            <td>{{ obj.sug_date }}</td>
+                            <td>
+                                <form action="{% url 'delete_suggestions' %}" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="del_id" value="{{ obj.sugs_id }}">
+                                    <button type="submit">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% endblock %}
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

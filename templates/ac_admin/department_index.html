@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+{% extends 'ac_admin/admin_index.html' %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    {% block style %}
+        .dept-table th{padding: 10px; font-size:20px;}
+        hr.hr2{background-color:orange;height:2px}
+        h1{color:green;}
+
+        .dept-details-table th{font-size:20px;padding:10px;color:blue;border-bottom:1px solid orange;}
+        .dept-details-table td{font-size:20px;padding:10px;border-bottom:1px solid red;}
+        .message{background-color:aqua;font-size:20px;}
+    {% endblock %}
+</head>
+<body>
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-5">
+{#            Update Department#}
+            {% if up_id %}
+                <form action="{% url 'admin_update_department' %}" method="post">
+                    {% csrf_token %}
+                    <table class="dept-table">
+                        <tr>
+                            <th colspan="2"><h1>Update Department...!</h1><hr class="hr2"> </th>
+                        </tr>
+                    {% for v in up_id %}
+                        <tr>
+                            <th>Department Name:</th>
+                            <th><input type="text" name="dept_name1" value="{{ v.dept_name }}">
+                                <input type="hidden" name="dept_name" value="{{ v.dept_name }}">
+                            </th>
+                        </tr>
+                    {% endfor %}
+                        <tr>
+                            <th><button type="submit">Update</button> </th>
+                        </tr>
+                    </table>
+                </form>
+{#          Add Department#}
+            {% else %}
+                <form action="{% url 'admin_add_department' %}" method="post">
+                    {% csrf_token %}
+                    <table class="dept-table">
+                        <tr>
+                            <th colspan="2"><h1>ADD Department...!</h1><hr class="hr2"> </th>
+                        </tr>
+                        {% for message in messages %}
+                            <tr>
+                                <th colspan="2" class="message">{{ message }}</th>
+                            </tr>
+                        {% endfor %}
+                        <tr>
+                            <th>Department Name:</th>
+                            <th><input type="text" name="dept_name" required></th>
+                        </tr>
+                        <tr>
+                            <th><button type="submit">Submit</button> </th>
+                        </tr>
+                    </table>
+                </form>
+            {% endif %}
+                {#        Department show        #}
+            </div>
+            <div class="col-sm-7">
+                <form>
+                <table>
+                    <tr>
+                        <th colspan="2"><h1>Available Department's</h1><hr class="hr2"> </th>
+                    </tr>
+                    {% if upmessage %}
+                            <tr>
+                                <th colspan="2" class="message">{{ upmessage }}</th>
+                            </tr>
+                    {% endif %}
+                    {% if message %}
+                    <tr>
+                        <th class="message">{{ message }}</th>
+                    </tr>
+                    {% endif %}
+                    <tr>
+                        <th>
+                            <table align="right" class="dept-details-table">
+                                    <tr>
+                                        <th>Department's Name</th>
+                                        <th>Update</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                {% for obj in data %}
+                                    <tr>
+                                        <td>{{ obj.dept_name }}</td>
+                                        <td><a href="{% url 'admin_update_department' %}?name={{ obj.dept_name }}"> Update</a> </td>
+                                        <td><a href="{% url 'admin_delete_department' %}?name={{ obj.dept_name }} ">Delete</a></td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </th>
+                    </tr>
+                </table>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+</body>
+</html>

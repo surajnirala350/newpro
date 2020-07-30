@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/admin_menu.css' %}" type="text/css">
+    <style>
+
+    </style>
+</head>
+<body>
+<table class="admin-menu" align="center">
+    <tr>
+        <th><button class="btn" type="submit"><a href="{% url 'admin_home' %}"> HOME </a></button></th>
+    </tr>
+    <tr>
+        <th><button class="btn" type="submit"><a href="{% url 'admin_add_department' %}">Add Department</a> </button></th>
+    </tr>
+    <tr>
+        <th><button class="btn" type="submit"><a href="{% url 'officer_register' %}"> Officer Register </a></button></th>
+    </tr>
+    <tr>
+        <th><button class="btn" type="submit"><a href="{% url 'ngo_register' %}"> NGO'S Register</a></button></th>
+    </tr>
+    <tr>
+        <th><button class="btn" type="submit"><a href="{% url 'complaints_list' %}?cmp_name=admin"> View Complaints </a></button></th>
+    </tr>
+    <tr>
+        <th><button class="btn" type="submit"><a href="{% url 'suggestions_list' %}?sg_name=admin"> View Suggestion </a></button></th>
+    </tr>
+    <tr>
+        <th><button class="btn" type="submit"><a href="{% url 'feedback_list' %}?fd_name=admin"> View Feedback </a></button></th>
+    </tr>
+    <tr>
+        <th><button class="btn" type="submit"><a href="{% url 'admin_logout' %}"> Logout </a></button></th>
+    </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="{% static 'css/main_index.css' %}" type="text/css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <style>
+
+    {% block style %}
+
+    {% endblock %}
+  </style>
+</head>
+<body>
+<div class="thumbnail">
+{% include 'title.html' %}
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-2 col-sm-2 col-xs-1 col1">
+        <div class="thumbnail">
+            <table align="center">
+                <tr>
+                    <img class="img1" src="{% static 'images/active3.jpg' %}" width="195px" height="150px">
+                    <hr class="new1">
+                </tr>
+                <tr>
+                    <p class="aap">Citizen Registration...!</p>
+                </tr>
+                <tr>
+                    <a class="nav-link" href="{% url 'register' %}">Register</a>
+                </tr>&emsp;
+                <tr>
+                    <p class="aap">New Citizen..!</p>
+                    <hr class="new1">
+                </tr>
+                <tr>
+                    <p>What Can We Do..?</p>
+                    ************************
+                    <p>
+                        #To complaint any problems in Your Region.<br>
+                        # To consult to the Region Department.<br>
+                        # Who given complaint to the particular department Mention clearly.<br>
+                        # Complaint are issued by Citizen's only.
+                    </p>
+                </tr>
+            </table>
+        </div>
+        </div>
+        <div class="col-md-8 col2">
+            {% include 'menu.html' %}
+        <div class="body-block">
+            {% block body %}
+            <h1 class="aap">Feedbacks...!</h1>
+            <div class="feedbacks-details-div">
+                <table class="feedbacks-details-table"  >
+                    {% for c in feed_list %}
+                        <tr>
+                            <th>{{ c.feed_id }}&emsp;Mr.&emsp;{{ c.citz_id.name }}</th>
+                            <th rowspan="3">&emsp;<img src="{{ c.image.url }}" width="200" height="100"></th>
+                        </tr>
+                        <tr>
+                            <th colspan="2">{{ c.feed_date }}</th>
+                        </tr><tr><th></th></tr>
+                        <tr>
+                            <th colspan="2" width="">{{ c.feed_message }}<hr></th>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            {% endblock %}
+        </div>
+            <div class="about-city">
+                <img src="{% static 'images/active_city.png' %}" width="900">
+                <p>Active City is a non-profit organization dedicated to ensuring that young
+                    people in Hartford have access to organized and affordable youth athletic programs.
+                    We support organizations and programs that serve youth through athletic programing
+                    throughout Hartford. Working with community stakeholders, we will transform Hartford
+                    into America’s most physically active city for children. These programs will grow and
+                    develop their spirit, mind, and body, while fostering relationships between the city’s
+                    youth and positive members of our community.</br>Know More About Active City...!
+                    <a href="{% url 'about_us' %}">Click Here</a></p>
+            </div>
+
+
+        </div>
+        <div class="col-md-2 col3">
+            {% include 'sidebar_menu.html' %}
+
+{#            content#}
+            <img src="{% static 'images/active4.jpg' %}" width="200" height="150">
+            <hr class="new1">
+            <div class="activity">
+            <p class="aap">Article Activities...!</p>
+                <marquee  behavior="scroll" direction="up" scrollamount="7" id="mk" height="340px;">
+                    <table class="article-table">
+                        {% for art in art_list %}
+                        <tr>
+                            <th>{{ art.art_id }} <img src="{% static 'images/bom.jpg' %}" width="35" height="35"></th>
+                        </tr>
+                        <tr>
+                           <th>{{ art.name }}</th>
+                        </tr>
+                        <tr>
+                            <th>{{ art.art_date }}</th>
+                        </tr>
+                        <tr>
+                            <th>{{ art.message }}<hr class="new1"></th>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </marquee>
+
+            </div>
+            <p class="app">
+                Article are Posted on the Date.
+                Exclusive activities are Posted.
+                Example: Social Activities, Health Camp.
+                Blood Camp
+                Free Health Check
+            </p>
+            <hr class="new1">
+            <img src="{% static 'images/active2.jpg' %}" width="165px" height="119px">
+            <hr class="new1">
+            <img src="{% static 'images/citizen2.jpg' %}" width="165px" height="119px">
+            <hr class="new1">
+        </div>
+        {% include 'footer.html' %}
+    </div>
+</div>
+</body>
+</html>

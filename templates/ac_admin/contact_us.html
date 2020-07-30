@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+{% extends 'main_index.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact Us</title>
+    <style>
+        th{}
+    </style>
+    {% block style %}
+        .contact-div{}
+
+        .main-table th{padding:5px;font-size:20px;}
+        .main-table{background-image: url("{% static 'images/bg-01.jpg' %}");
+         color:white;background-repeat:no-repeat;background-size: cover;
+                padding:5%;}
+
+        .contact-details{margin-left:5%;}
+        .contact-form input{background:none;color:white;}
+        .contact-form input:hover{background:white;color:black;}
+        .contact-form textarea{background:none;color:white;}
+        .contact-form textarea:hover{background:white;color:black;}
+        .cmessage{background-color:#42f46e;text-align:center;color:black;}
+    {% endblock %}
+</head>
+<body>
+{% block body %}
+
+    <div class="contact-div">
+        <table align="center" class="main-table">
+            <tr>
+            {% if cmessage %}
+                <th colspan="2" class="cmessage">{{ cmessage }}</th>
+            {% else %}
+                <th colspan="2" class="cmessage">Your email address will not be published. Required fields are marked *</th>
+            {% endif %}
+            </tr>
+            <tr>
+                <th>
+                    <table  class="contact-details">
+                        <tr><th>Address</th></tr>
+                        <tr><th width="300">405,Durga complex Near hotel prashant
+                            navlakha main road Indore (MP)</th></tr>
+                        <tr><th>Lets Talk</th></tr>
+                        <tr><th>(+91) 7999677658</th></tr>
+                        <tr><th>General Support</th></tr>
+                        <tr><th>activecityadministration@gmail.com</th></tr>
+                    </table>
+                </th>
+                <th>
+                    <form action="{% url 'contact_us' %}" method="post">
+                        {% csrf_token %}
+                        <table align="center" class="contact-form">
+                            <tr>
+                                <th><h1>Send Us A Message</h1></th>
+                            </tr>
+                            <tr>
+                                <th>Name *&emsp;<input type="text" name="name" placeholder="Full Name" autofocus required> </th>
+                            </tr>
+                            <tr>
+                                <th>Email *&emsp;<input type="email" name="email" placeholder="Eg. example@gmail.com" required> </th>
+                            </tr>
+                            <tr>
+                                <th>Number *<input type="number" name="mobile" placeholder="Mobile Number" required></th>
+                            </tr>
+                            <tr>
+                                <th>Comment *<textarea name="message" required placeholder="Write us a message"></textarea></th>
+                            </tr>
+                            <tr>
+                                <th>&emsp;&emsp;<button type="submit"> Send Message</button></th>
+                            </tr>
+
+                        </table>
+                    </form>
+                </th>
+            </tr>
+        </table>
+    </div>
+{% endblock %}
+</body>
+</html>

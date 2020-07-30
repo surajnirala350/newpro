@@ -1,0 +1,33 @@
+.col3{ margin-top: 10px;}
+hr.new1{background-color: red; height: 2px;}
+
+.container-fluid{
+    margin: 0px; padding: 0px;}
+.row{}
+#title{text-align: center;font-family: Italic;font-size: 45px;color: green;font-weight: bolder;}
+
+/*collum first style*/
+.col1{font-family: Italic;}
+.col1 tr{padding: 50px;}
+.nav-link{text-align: center;font-weight: bold;}
+.nav-link:hover{color: yellow;background-color: blueviolet;}
+
+/*Collum second style*/
+.col2{font-family: "Italic";}
+.navbar{margin-top:5%;}
+.btn-primary a{color: white; font-family: Verdana;font-size: 15px; font-weight: bold;}
+
+
+.activity{height: 400px;overflow: hidden;}
+        .aap{border-bottom: 2px solid red;background-color: greenyellow;border-radius: 20px;text-align: center;}
+        .app{background-color: greenyellow;border-radius: 20px;text-align: center}
+        .article-table{height: 350px; margin-left: 5%;}
+        p{font-weight: bold;}
+        .feedbacks-details-div{overflow: scroll;height: 500px;
+            border-radius: 20px;align-self: center; }
+        .feedbacks-details-table{margin-left:10%;}
+        .feedbacks-details-table th{font-size: 20px;padding:5px;}
+        .body-block{height: 550px;}
+        .about-city{}
+        .about-city p{width: 80%; margin-left: 10%;font-size: 20px;
+                    margin-top:5%;}

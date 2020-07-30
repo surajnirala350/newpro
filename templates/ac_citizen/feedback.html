@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+{% extends 'ac_citizen/citizen_index.html' %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block style %}
+        .feedback-table{margin-left:20%;}
+        .feedback-table th{padding:5px;font-size:20px;}
+        h1{color:green;}
+        hr.hr2{background-color:orange;height:2px;  }
+        .message{background-color:aqua;}
+    {% endblock %}
+</head>
+<body>
+{% block body %}
+<form action="{% url 'feedback' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table class="feedback-table">
+        <tr>
+            <th colspan="2"><h1>Feedback....!</h1><hr class="hr2"> </th>
+        </tr>
+        <tr>
+            {% for message in messages %}
+                <th class="message">{{ message }}</th>
+            {% endfor %}
+        </tr>
+        <tr>
+            <th>Department ID:</th>
+            <th>
+                <select name="dept_name">
+                    {% for d in data1 %}
+                        <option>{{ d.dept_name }}</option>
+                    {% endfor %}
+                </select>
+            </th>
+        </tr>
+        <tr>
+            <th>Citizen ID:</th>
+            <th><input type="number" name="citz_id" readonly value="{{ data2 }}"></th>
+        </tr>
+        <tr>
+            <th>Message :</th>
+            <th>
+                <textarea name="fmessage" required></textarea>
+            </th>
+        </tr>
+        <tr>
+            <th>Image :</th>
+            <th><input type="file" name="image" > </th>
+        </tr>
+        <tr>
+            <th><button type="submit">Feedback</button> </th>
+        </tr>
+    </table>
+</form>
+{% endblock %}
+</body>
+</html>

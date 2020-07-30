@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+        .nav-link{background-color: blue;color: white;
+                  width: 100px; font-size: 17px;}
+        .nav-link:hover {color: yellow;}
+        .nav{border: none;}
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            }
+        hr.new{background-color: red;height: 2px;width: 90%;}
+    </style>
+
+</head>
+<body>
+<nav class="navbar navbar-expand-sm">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav">
+            <li class="nav-item"><button class="btn" type="submit"><a class="nav-link" href="{% url 'index' %}">HOME</a></button></li>
+            <li class="nav-item"><button class="btn" type="submit"><a class="nav-link" href="{% url 'admin_login' %}">Admin</a></button></li>
+            <li class="nav-item"><button class="btn" type="submit"><a class="nav-link" href="{% url 'officer_login' %}">Officer</a></button></li>
+            <li class="nav-item"><button class="btn" type="submit"><a class="nav-link" href="{% url 'citizen_login' %}">Citizen</a></button></li>
+            <li class="nav-item"><button class="btn" type="submit"><a class="nav-link" href="{% url 'ngo_login' %}">NGO'S</a></button></li>
+            <li class="nav-item"><button class="btn" type="submit"><a class="nav-link" href="{% url 'contact_us' %}">Contact us</a></button></li>
+        </ul>
+    </div>
+</nav><hr class="new">
+</body>
+</html>

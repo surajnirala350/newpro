@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+{% extends 'ac_admin/admin_index.html' %}
+{% include 'title.html' %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <title>Officer Registration</title>
+    {% block style %}
+        .officer-table{margin-left:5%;}
+        .officer-table th{padding: 5px;font-size: 23px;}
+        h2{color: green;}
+        .off{color: magenta;}
+        hr.hr2{background-color: orange;height: 2px;}
+        .message{font-size:20px;background-color:aqua;}
+
+        .officer-details-table th{font-size:25px;padding:10px;color:blue;border-bottom:1px solid orange;}
+        .officer-details-table td{font-size:25px;padding:10px;border-bottom:1px solid red;}
+    {% endblock %}
+</head>
+<body>
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-5">
+{#            update form#}
+            {% if up_name %}
+                <form action="{% url 'update_officer' %}" method="post">
+                    {% csrf_token %}
+                    <table class="officer-table">
+                        <tr>
+                            <th colspan="2"><h2>Update Officer...!</h2><hr class="hr2"></th>
+                        </tr>
+                    {% for v in up_name %}
+                        <tr>
+                            <th>Name :</th>
+                            <th>
+                                <input type="text" name="new_name" value="{{ v.name }}" required>
+                                <input type="hidden" name="name" value="{{ v.name }}"></th>
+                        </tr>
+                        <tr>
+                            <th>mobile :</th>
+                            <th><input type="number" name="mobile" value="{{ v.mobile }}" required></th>
+                        </tr>
+                        <tr>
+                            <th>Email ID:</th>
+                            <th><input type="email" name="email" value="{{ v.email }}" required></th>
+                        </tr>
+                        <tr>
+                            <th>Department:</th>
+                            <th>
+                                <select name="dept_name">
+                                    {% for data in data %}
+                                        <option>{{ data.dept_name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>Username :</th>
+                            <th><input type="text" name="username" value="{{ v.username }}" required></th>
+                        </tr>
+                        <tr>
+                            <th>Password :</th>
+                            <th><input type="password" name="password" value="{{ v.password }}" required></th>
+                        </tr>
+                    {% endfor %}
+                        <tr>
+                            <th><button type="submit">Submit</button> </th>
+                            <th></th>
+                        </tr>
+                    </table>
+                </form>
+{#            registraction form#}
+            {% else %}
+                <form action="{% url 'officer_register' %}" method="post">
+                    {% csrf_token %}
+                    <table class="officer-table">
+                        <tr>
+                            <th colspan="2" class="off"><h2>Officer Registration...!</h2><hr class="hr2"></th>
+                        </tr>
+                        {% if rmessage %}
+                            <tr>
+                                <th colspan="2" class="message">{{ rmessage }}</th>
+                            </tr>
+                        {% endif %}
+                        <tr>
+                            <th>Name :</th>
+                            <th><input type="text" name="name" required></th>
+                        </tr>
+                        <tr>
+                            <th>mobile :</th>
+                            <th><input type="number" name="mobile" required></th>
+                        </tr>
+                        <tr>
+                            <th>Email ID:</th>
+                            <th><input type="email" name="email" required></th>
+                        </tr>
+                        <tr>
+                            <th>Department:</th>
+                            <th>
+                                <select name="dept_name">
+                                    {% for data in data %}
+                                        <option>{{ data.dept_name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>Username :</th>
+                            <th><input type="text" name="username" required></th>
+                        </tr>
+                        <tr>
+                            <th>Password :</th>
+                            <th><input type="password" name="password" required></th>
+                        </tr>
+                        <tr>
+                            <th><button type="submit">Submit</button> </th>
+                            <th></th>
+                        </tr>
+                    </table>
+                </form>
+            {% endif %}
+            </div>
+            <div class="col-sm-7">
+                <form>
+                <table>
+                    <tr>
+                        <th colspan="2"><h2>Available Officer's</h2><hr class="hr2"> </th>
+                    </tr>
+                    {% if umessage %}
+                            <tr>
+                                <th class="message" colspan="4">{{ umessage }}</th>
+                            </tr>
+                    {% endif %}
+                    {% if message %}
+                            <tr>
+                                <th class="message" colspan="4">{{ message }}</th>
+                            </tr>
+                    {% endif %}
+                    <tr>
+                        <th>
+                            <table class="officer-details-table">
+                                    <tr>
+                                        <th>Officer</th>
+                                        <th>Department</th>
+                                        <th>Update</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                {% for obj in data2 %}
+                                    <tr>
+                                        <td>{{ obj.name }}</td>
+                                        <td>{{ obj.dept_name_id }}</td>
+                                        <td><a href="{% url 'update_officer' %}?name={{ obj.name }}">Update</a> </td>
+                                        <td><a href="{% url 'delete_officer' %}?name={{ obj.name }}">Delete</a> </td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </th>
+                    </tr>
+                </table>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+</body>
+</html>

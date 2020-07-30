@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+{% extends 'ac_admin/admin_index.html' %}
+{% include 'title.html' %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <title>Ngo Register</title>
+    {% block style %}
+        .ngo_register{margin-left: 5%;}
+        .ngo_register input{width:230px;height:40px;}
+        .ngo_register th{padding: 6px; font-size:20px;}
+        hr.hr2{background-color:orange;height:2px;}
+        h1{color:green;}
+
+        .ngos-details-table th{font-size:25px;padding:10px;color:blue;border-bottom:1px solid orange;}
+        .ngos-details-table td{font-size:25px;padding:10px;border-bottom:1px solid red;}
+        .message{font-size:20px; background-color:aqua;}
+    {% endblock %}
+</head>
+<body>
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+{#            Ngo update form#}
+            {% if up_name %}
+                <form method="post" action="{% url 'update_ngos' %}">
+                    {% csrf_token %}
+                    <table class="ngo_register">
+                        <tr>
+                            <th colspan="2"><h1>NGO'S Update...!</h1><hr class="hr2"></th>
+                        </tr>
+                        {% for v in up_name %}
+                        <tr>
+                            <th>Name :</th>
+                            <th><input type="text" name="new_name" value="{{ v.name }}">
+                                <input type="hidden" name="name" value="{{ v.name }}">
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>Mobile :</th>
+                            <th><input type="number" name="mobile" value="{{ v.mobile }}"></th>
+                        </tr>
+                        <tr>
+                            <th>Email ID:</th>
+                            <th><input type="email" name="email" value="{{ v.email }}"></th>
+                        </tr>
+                        <tr>
+                            <th>Address :</th>
+                            <th><input type="text" name="address" value="{{ v.address }}"></th>
+                        </tr>
+                        <tr>
+                            <th>Username :</th>
+                            <th><input type="text" name="username" value="{{ v.username }}"></th>
+                        </tr>
+                        <tr>
+                            <th>Password :</th>
+                            <th><input type="password" name="password" value="{{ v.password }}"></th>
+                        </tr>
+                        {% endfor %}
+                        <tr>
+                            <th><button type="submit">Update</button></th>
+                        </tr>
+                    </table>
+                </form>
+{#            Ngo register form#}
+            {% else %}
+                <form method="post" action="{% url 'ngo_register' %}">
+                    {% csrf_token %}
+                    <table class="ngo_register">
+                        <tr>
+                            <th colspan="2"><h1>NGO'S Registration...!</h1><hr class="hr2"></th>
+                        </tr>
+                        {% if umessage %}
+                            <tr>
+                                <th colspan="2" class="message">{{ umessage }}</th>
+                            </tr>
+                        {% endif %}
+                        {% if rmessage %}
+                            <tr>
+                                <th colspan="2" class="message">{{ rmessage }}</th>
+                            </tr>
+                        {% endif %}
+                        <tr>
+                            <th>Name :</th>
+                            <th><input type="text" name="name" required> </th>
+                        </tr>
+                        <tr>
+                            <th>Mobile :</th>
+                            <th><input type="number" name="mobile" required></th>
+                        </tr>
+                        <tr>
+                            <th>Email ID:</th>
+                            <th><input type="email" name="email" required></th>
+                        </tr>
+                        <tr>
+                            <th>Address :</th>
+                            <th><input type="text" name="address" required></th>
+                        </tr>
+                        <tr>
+                            <th>Username :</th>
+                            <th><input type="text" name="username" required></th>
+                        </tr>
+                        <tr>
+                            <th>Password :</th>
+                            <th><input type="password" name="password" required></th>
+                        </tr>
+                        <tr>
+                            <th><button type="submit">Register</button></th>
+                        </tr>
+                    </table>
+                </form>
+            {% endif %}
+            </div>
+            <div class="col-sm-6">
+                <form>
+                <table>
+                    <tr>
+                        <th colspan="2"><h1>Available NGO'S</h1><hr class="hr2"> </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <table align="right" class="ngos-details-table">
+                                    {% if message %}
+                                        <tr>
+                                            <th colspan="2" class="message">{{ message }}</th>
+                                        </tr>
+                                    {% endif %}
+                                    <tr>
+                                        <th>NGO'S Name</th>
+                                        <th>Update</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                {% for obj in data %}
+                                    <tr>
+                                        <td>{{ obj.name }}</td>
+                                        <td><a href="{% url 'update_ngos' %}?name={{ obj.name }}">Update</a></td>
+                                        <td><a href="{% url 'delete_ngos' %}?name={{ obj.name }}">Delete</a></td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </th>
+                    </tr>
+                </table>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+</body>
+</html>

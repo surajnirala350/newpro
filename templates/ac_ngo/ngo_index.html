@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+{% include 'title.html' %}
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <title>NGO's</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<style>
+    .col1{height: 350px;border-right: 2px solid red;width: 100%;}
+    .col2{overflow: scroll; height: 400px;}
+    .ngo-menu .btn{background-color: blue;color: white;width: 180px;text-align: left;font-size: 18px;}
+    .ngo-menu th{padding: 5px;}
+    .ngo-menu a{color: white;}
+    .ngo-menu a:hover{color: white;}
+    h1{color:green;}
+    .artcle-details-table th{font-size:20px;border-bottom:2px solid orange}
+    .artcle-details-table td{border-bottom:1px solid red;font-size:20px;text-align:center;}
+
+    {% block style %}
+
+    {% endblock %}
+</style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2 col1">
+            <table class="ngo-menu">
+                <tr>
+                    <th><button class="btn"> <a href="{% url 'ngo_home' %}">Home</a></button></th>
+                </tr>
+                <tr>
+                    <th><button class="btn"><a href="{% url 'ngo_article' %}">Activity</a></button></th>
+                </tr>
+                <tr>
+                    <th><button class="btn"><a href="{% url 'suggestion' %}">Suggestions</a></button></th>
+                </tr>
+                <tr>
+                    <th><button class="btn"><a href="{% url 'suggestions_list' %}">View Suggestions</a></button></th>
+                </tr>
+                <tr>
+                    <th><button class="btn"><a href="{% url 'ngo_logout' %}">Logout</a></button></th>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-10 col2">
+            {% block body %}
+                <h2>Welcome to NGO's....!</h2>
+            <table class="artcle-details-table" align="center">
+                <tr>
+                    <th colspan="5"><h1>Article Activity</h1></th>
+                </tr>
+                <tr>
+                    <th width="50">Id</th>
+                    <th width="200">Article Name</th>
+                    <th width="200">Article Date</th>
+                    <th width="100">Ngo Id</th>
+                    <th width="300">Message</th>
+                </tr>
+                {% for d in list %}
+                <tr>
+                    <td>{{ d.art_id }}</td>
+                    <td>{{ d.name }}</td>
+                    <td>{{ d.art_date }}</td>
+                    <td>{{ d.ngo_id_id }}</td>
+                    <td>{{ d.message }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+
+
+            {% endblock %}
+        </div>
+    </div>
+</div>
+</body>
+</html>

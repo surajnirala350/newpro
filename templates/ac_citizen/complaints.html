@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+{% extends 'ac_citizen/citizen_index.html' %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block style %}
+        .complaint-table{margin-left:20%;}
+        .complaint-table th{padding:5px;font-size:20px;}
+        h1{color:green;}
+        hr.hr2{background-color:orange;height:2px;  }
+    {% endblock %}
+</head>
+<body>
+{% block body %}
+    <form action="{% url 'complaints' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+        <table class="complaint-table">
+            <tr>
+                <th colspan="2"><h1>Complaints....!</h1><hr class="hr2"> </th>
+            </tr>
+            <tr>
+                <th>Department ID:</th>
+                <th>
+                    <select name="dept_name">
+                        {% for d in data1 %}
+                            <option>{{ d.dept_name }}</option>
+                        {% endfor %}
+                    </select>
+                </th>
+            </tr>
+            <tr>
+                <th>Citizen ID:</th>
+                <th><input type="number" name="citz_id" readonly value="{{ data2 }}"></th>
+            </tr>
+            <tr>
+                <th>Message :</th>
+                <th>
+                    <textarea name="message" required></textarea>
+                </th>
+            </tr>
+            <tr>
+                <th>Image :</th>
+                <th><input type="file" name="image" > </th>
+            </tr>
+            <tr>
+                <th><button type="submit">complaint</button> </th>
+            </tr>
+        </table>
+    </form>
+{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% extends 'ac_citizen/citizen_index.html' %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block style %}
+        .replay-table{margin-left:10%;}
+        .replay-table th{font-size:20px;border-bottom:2px solid orange;padding:10px;text-align:center;}
+        .replay-table td{border-bottom:1px solid red;font-size:20px; color:blue;text-align:center;}
+        h1{color:green;}
+    {% endblock %}
+</head>
+<body>
+{% block body %}
+<table class="replay-table">
+    <tr>
+        <th colspan="4"><h1>Replay's...!</h1></th>
+    </tr>
+    <tr>
+        <th width="150">Replay Id</th>
+        <th width="150">Feedback Id</th>
+        <th width="200">Date</th>
+        <th width="300">Message</th>
+    </tr>
+    {% for d in list %}
+    <tr>
+        <td>{{ d.reply_id }}</td>
+        <td>{{ d.feed_id_id }}</td>
+        <td>{{ d.rep_date }}</td>
+        <td>{{ d.message }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
+</body>
+</html>

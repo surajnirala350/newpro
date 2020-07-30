@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% include 'title.html' %}
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <title>Admin</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/admin_index.css' %}" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<style>
+    hr.hr3{background-color: blue; height: 2px;}
+    .col2{background-image: url("{% static 'images/adminback.gif' %}");
+           background-size: cover; background-repeat: no-repeat;overflow: scroll; height: 400px;}
+    h2{color: green;text-align: right;}
+    .col1{overflow: scroll; height: 400px;}
+    {% block style %}
+
+    {% endblock %}
+
+</style>
+{% block head %}
+{% endblock %}
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2 col1">
+            {% include 'ac_admin/admin_menu.html' %}
+        </div>
+        <div class="col-md-10 col2">
+            {% block body %}
+                <h2>Welcome Mr/Ms :{{ request.session.username }}</h2>
+            {% endblock %}
+        </div>
+    </div>
+        {% include 'footer.html' %}
+    </div>
+</body>
+</html>

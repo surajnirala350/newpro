@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        .comp-menu .btn{background-color: blue;color: white;width: 200px;text-align: center;font-size: 18px;}
+        .comp-menu th{padding: 10px;}
+        .comp-menu a{color: white;}
+        .comp-menu a:hover{color: white;}
+    </style>
+</head>
+<body>
+<table align="center" class="comp-menu">
+    <tr>
+        <th><button class="btn" type="submit"><a href="{% url 'admin_pending_complaints' %}"> Pending Complaints </a></button></th>
+        <th><button class="btn" type="submit"><a href="{% url 'assigned_complaints' %}"> Assign Complaints </a></button></th>
+        <th><button class="btn" type="submit"><a href="{% url 'admin_closed_complaints' %}"> Closed Complaints </a></button></th>
+    </tr>
+</table>
+</body>
+</html>

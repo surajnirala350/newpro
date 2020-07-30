@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+{% extends 'ac_admin/admin_index.html' %}
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    {% block style %}
+        .sugg-table{margin-left:5%;}
+        .sugg-table th{font-size:20px;border-bottom:2px solid orange}
+        .sugg-table td{border-bottom:1px solid red;font-size:20px;}
+        h1{color:green;}
+    {% endblock %}
+
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            {% block body %}
+                <table class="sugg-table">
+                    <tr><th colspan="6"><h1>Contact Us Notifications...!</h1></th></tr>
+                    <tr>
+                        {% for message in messages %}
+                            <th colspan="2">{{ message }}</th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <th width="100">Name</th>
+                        <th width="150">Mobile</th>
+                        <th width="250">Email</th>
+                        <th width="250">Message</th>
+                        <th width="150">Date</th>
+                        <th width="150">Delete</th>
+                    </tr>
+                    {% for obj in list %}
+                        <tr>
+                            <td>{{ obj.name }}</td>
+                            <td>{{ obj.mobile }}</td>
+                            <td>{{ obj.email }}</td>
+                            <td>{{ obj.message }}</td>
+                            <td>{{ obj.date }}</td>
+                            <td><a href="{% url 'delete_notification' %}?id={{ obj.email }}">Delete</a></td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% endblock %}
+        </div>
+    </div>
+</div>
+</body>
+</html>

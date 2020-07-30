@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+{% extends 'ac_officer/officer_register.html' %}
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block style %}
+        .otp-table th{padding:5px;}
+    {% endblock %}
+</head>
+{% block body %}
+<body>
+       <table align="center">
+           <tr>
+               <th>
+                   <form action="{% url 'officer_otp_check' %}" method="post">
+                       {% csrf_token %}
+                    <table align="center" class="otp-table">
+                        <tr><th>OTP Validation</th></tr>
+                        <tr><th><input type="number" placeholder="Contact No" required name="cno"></th></tr>
+                        <tr><th><input type="text" name="otp" placeholder="OTP" required></th></tr>
+                        <tr><th><button type="submit">Check</button> </th></tr>
+                    </table>
+                   </form>
+               </th>
+           </tr>
+           <tr>
+               <th>
+                   {% for message in messages %}
+                       {{ message }}
+                   {% endfor %}
+               </th>
+           </tr>
+       </table>
+{% endblock %}
+</body>
+</html>

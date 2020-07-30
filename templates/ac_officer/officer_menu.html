@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        .officer-menu .btn{background-color: blue;color: white;width: 180px;text-align: left;font-size: 18px;}
+        .officer-menu th{padding: 5px;}
+        .officer-menu a{color: white;}
+        .officer-menu a:hover{color: white;}
+    </style>
+</head>
+<body>
+<table class="officer-menu" align="center">
+    <tr>
+        <th><button class="btn" type="submit"><a href="{% url 'off_home' %}"> Home </a></button></th>
+    </tr>
+    <tr>
+        <th><button class="btn" type="submit"><a href="{% url 'officer_complaints_list' %}"> View Complaints </a></button></th>
+    </tr>
+    <tr>
+        <th><button class="btn" type="submit"><a href="{% url 'officer_suggestions_list' %}?name={{ request.session.department }}"> View Suggestion </a></button></th>
+    </tr>
+    <tr>
+{#        <th><button class="btn" type="submit"><a href="{% url 'feedback_list' %}"> View Feedback </a></button></th>#}
+    </tr>
+    <tr>
+        <th><button class="btn" type="submit"><a href="{% url 'officer_logout' %}"> Logout </a></button></th>
+    </tr>
+</table>
+</body>
+</html>

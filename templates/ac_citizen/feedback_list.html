@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+{% extends 'ac_citizen/citizen_index.html' %}
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    {% block style %}
+        .feed-table{}
+        .feed-table th{font-size:20px;border-bottom:2px solid orange;padding:5px;}
+        .feed-table td{border-bottom:1px solid red;font-size:20px;}
+        h1{color:green;}
+    {% endblock %}
+{% block head %}
+
+{% endblock %}
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2 col1">
+        </div>
+        <div class="col-md-10">
+            {% block body %}
+
+                <table class="feed-table">
+                    <tr><th colspan="7"><h1>Citizen Feedbacks...!</h1></th></tr>
+                    <tr>
+                        <th width="100">feed Id</th>
+                        <th width="100">Citizen Id</th>
+                        <th width="200">Message</th>
+                        <th width="150">Department</th>
+                        <th width="150">Date</th>
+                        <th width="150">Image</th>
+                        <th width="100">Comments</th>
+
+                    </tr>
+                    {% for obj in data %}
+                        <tr>
+                            <td>{{ obj.feed_id }}</td>
+                            <td>{{ obj.citz_id_id }}</td>
+                            <td>{{ obj.feed_message  }}</td>
+                            <td>{{ obj.dept_name_id }}</td>
+                            <td>{{ obj.feed_date }}</td>
+                            <td><img src="{{ obj.image.url }}" width="100" height="100"></td>
+                            <td>
+                                <a href="{% url 'citizen_replay_list' %}?id={{ obj.feed_id }}">Check</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% endblock %}
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
